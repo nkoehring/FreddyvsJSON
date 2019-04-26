@@ -399,7 +399,7 @@ class Game {
       this.drawWelcome()
     } else if (this.state === STATE.highscore) {
       this.drawHighscore()
-    } else {
+    } else if (this.state === STATE.game) {
       const now = Date.now()
       this.reset()
       this.drawBackground()
