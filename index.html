@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Freddy vs JSON — 2019-04 Wunderdog Berlin Techsession</title>
+    <meta name="author" content="Norman Köhring" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+      body {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-content: center;
+        font-family: monospace;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 1.5em;
+        color: #F0EEEE;
+        width: 960px;
+        margin: 0 auto;
+        padding: 0;
+        background: #556060;
+        text-align: center;
+      }
+      canvas {
+        width: 960px;
+        height: 540px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" />
+
+    <script src="app.js"></script>
+    <script>
+      new Game(document.getElementById('canvas'))
+    </script>
+  </body>
+</html>
