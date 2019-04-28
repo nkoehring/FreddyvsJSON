@@ -1,4 +1,5 @@
 // that's like as close as you can get to Enums in plain Javascript nowadays
+// see https://en.wikipedia.org/wiki/Enumerated_type to learn about Enums
 const STATE = Object.freeze({
   welcome: Symbol('welcome'),
   game: Symbol('game'),
@@ -36,7 +37,7 @@ class Game {
     this.ctx = canvas.getContext('2d')
 
     this.state = STATE.welcome
-    this.lastDraw = Date.now()
+    this.lastDraw = 0
     this.frameCount = 0
     this.fps = 0
     this.hitCount = 0
@@ -168,7 +169,7 @@ class Game {
     this.initPlayer()
     this.initEnemies()
 
-    this.update()
+    requestAnimationFrame(stamp => this.update(stamp))
   }
 
   reset () {
@@ -393,24 +394,22 @@ class Game {
     this.text(`(and took ${this.hitCount} enemies with you)`, 10, this.centerY + 8)
   }
 
-  update () {
-    requestAnimationFrame(() => this.update())
+  update (stamp) {
     if (this.state === STATE.welcome) {
       this.drawWelcome()
     } else if (this.state === STATE.highscore) {
       this.drawHighscore()
     } else if (this.state === STATE.game) {
-      const now = Date.now()
       this.reset()
       this.drawBackground()
       this.drawPlayer()
-      this.drawPlayerBullets(now)
-      this.drawEnemies(now)
-      this.drawEnemyBullets(now)
+      this.drawPlayerBullets(stamp)
+      this.drawEnemies(stamp)
+      this.drawEnemyBullets(stamp)
       this.collisionDetection()
-      this.drawUI(now)
+      this.drawUI(stamp)
       this.frameCount++
-      this.lastDraw = now
+      this.lastDraw = stamp
 
       // are we dead yet?
       if (this.playerSize <= 0) {
@@ -418,5 +417,7 @@ class Game {
         this.state = STATE.highscore
       }
     }
+
+    requestAnimationFrame(stamp => this.update(stamp))
   }
 }
