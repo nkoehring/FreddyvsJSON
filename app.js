@@ -178,8 +178,8 @@ class Game {
     this.ctx.font = '16px monospace'
 
     // precalculate often used values
-    this.centerX = width / 2.0
-    this.centerY = height / 2.0
+    this.centerX = this.width / 2.0
+    this.centerY = this.height / 2.0
 
     // initialize game state and HUD
     this.state = STATE.welcome
